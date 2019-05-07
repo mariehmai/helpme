@@ -20,11 +20,7 @@ export default {
 .card {
   cursor: pointer;
   border-radius: 8px;
-  border: 1px solid #cccccc;
-}
-
-.card:hover {
-  background-color: #cccccc;
+  box-shadow: 2px 2px 4px #596068;
 }
 
 .img {

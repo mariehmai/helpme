@@ -2,11 +2,9 @@
   <div class="home">
     <nav>
       <ul id="menu-list">
-        <li v-for="item in menu" v-bind:key="item.id">
-          <router-link v-bind:to="item.path">
-            <Card class="menu-item" v-bind:title="item.title" v-bind:logo="item.logo"/>
-          </router-link>
-        </li>
+        <router-link class="link" v-for="item in menu" v-bind:key="item.id" v-bind:to="item.path">
+          <Card class="menu-item" v-bind:title="item.title" v-bind:logo="item.logo"/>
+        </router-link>
       </ul>
     </nav>
   </div>
@@ -74,8 +72,15 @@ ul {
   justify-content: center;
 }
 
-li {
+.link {
   margin: 20px 10px;
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+.link:hover {
+  background-color: #f6f8fa;
+  border-radius: 8px;
 }
 
 .menu-item {
