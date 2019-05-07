@@ -1,50 +1,18 @@
 <template>
   <div id="app">
-    <img alt="HelpMe logo" src="./assets/logo.svg">
-    <Landing v-bind:menu="menu" msg="HelpMe"/>
+    <img v-on:click="goBack" alt="HelpMe logo" src="./assets/logo.svg">
+    <h1>HelpMe</h1>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Landing from "./components/Landing.vue";
-
-let menu = [
-  {
-    id: 0,
-    title: "Emergency numbers",
-    logo: "911.svg"
-  },
-  {
-    id: 1,
-    title: "Emergency contacts",
-    logo: "phone-book.svg"
-  },
-  {
-    id: 2,
-    title: "Danger alert",
-    logo: "alert.svg"
-  },
-  {
-    id: 3,
-    title: "Police stations",
-    logo: "police.svg"
-  },
-  {
-    id: 4,
-    title: "Hospitals",
-    logo: "hospital.svg"
-  }
-];
-
 export default {
   name: "app",
-  data: function() {
-    return {
-      menu
-    };
-  },
-  components: {
-    Landing
+  methods: {
+    goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
+    }
   }
 };
 </script>

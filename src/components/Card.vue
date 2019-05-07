@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div v-on:click="onClick" class="card">
     <img class="img" v-bind:alt="logo" v-bind:src="require('../assets/menu/' + logo)">
     <p>{{ title }}</p>
   </div>
@@ -10,7 +10,8 @@ export default {
   name: "Card",
   props: {
     title: String,
-    logo: String
+    logo: String,
+    onClick: { type: Function, default: () => {} }
   }
 };
 </script>
@@ -28,5 +29,6 @@ export default {
 
 .img {
   max-width: 50px;
+  padding-top: 20px;
 }
 </style>
