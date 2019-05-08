@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <div class="flag-container">
+  <v-app id="app-container">
+    <div class="logo-container">
       <button v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
         <flag :iso="entry.flag"/>
         {{entry.title}}
@@ -11,7 +11,7 @@
       <h1>{{$t("app.name")}}</h1>
     </div>
     <router-view></router-view>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -40,16 +40,16 @@ export default {
 </script>
 
 <style>
-#app {
+#app-container {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 40px;
+  padding: 40px 20px;
 }
 
-.flag-container {
+.logo-container {
   margin-bottom: 40px;
 }
 
