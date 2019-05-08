@@ -40,12 +40,7 @@ ul {
 .link {
   margin: 20px 10px;
   text-decoration: none;
-  color: #2c3e50;
-}
-
-.link:hover {
-  background-color: #f6f8fa;
-  border-radius: 8px;
+  color: var(--v-primary-base);
 }
 
 .menu-item {

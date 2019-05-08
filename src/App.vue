@@ -40,13 +40,19 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: var(--v-background-base);
+}
+
 #app-container {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--v-primary-base);
   padding: 40px 20px;
+  max-width: 850px;
+  margin: auto;
 }
 
 .logo-container {
@@ -55,7 +61,7 @@ export default {
 
 button {
   padding: 8px;
-  border: 1px solid green;
+  border: 1px solid var(--v-secondary-base);
   border-radius: 8px;
   margin: 6px;
 }
