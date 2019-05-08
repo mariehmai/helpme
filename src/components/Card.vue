@@ -1,5 +1,5 @@
 <template>
-  <div v-on:click="onClick" class="card">
+  <div v-on:click="onClick" id="card">
     <img class="img" :alt="logo" :src="require('@/assets/menu/' + logo)">
     <p>{{ title }}</p>
   </div>
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style scoped>
-.card {
+#card {
   cursor: pointer;
   border-radius: 8px;
   box-shadow: 2px 2px 4px #596068;

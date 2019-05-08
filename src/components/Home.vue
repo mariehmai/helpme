@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div id="home">
     <nav>
       <ul id="menu-list">
         <router-link class="link" v-for="item in menu" :key="item.id" :to="item.path">
