@@ -7,7 +7,7 @@
       </button>
     </div>
     <div>
-      <img v-on:click="goBack" alt="HelpMe logo" src="./assets/logo.svg">
+      <img v-on:click="goBack" alt="HelpMe logo" src="@/assets/logo.svg">
       <h1>{{$t("app.name")}}</h1>
     </div>
     <router-view></router-view>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import i18n from "@/plugins/i18n/i18n";
+import i18n from "@/plugins/i18n";
 
 export default {
   name: "app",

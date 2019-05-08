@@ -1,6 +1,6 @@
 <template>
   <div v-on:click="onClick" class="card">
-    <img class="img" v-bind:alt="logo" v-bind:src="require('../assets/menu/' + logo)">
+    <img class="img" v-bind:alt="logo" v-bind:src="require('@/assets/menu/' + logo)">
     <p>{{ title }}</p>
   </div>
 </template>
