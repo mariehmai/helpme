@@ -2,8 +2,8 @@
   <div class="home">
     <nav>
       <ul id="menu-list">
-        <router-link class="link" v-for="item in menu" v-bind:key="item.id" v-bind:to="item.path">
-          <Card class="menu-item" v-bind:title="$t(item.titleIntlId)" v-bind:logo="item.logo"/>
+        <router-link class="link" v-for="item in menu" :key="item.id" :to="item.path">
+          <Card class="menu-item" :title="$t(item.titleIntlId)" :logo="item.logo"/>
         </router-link>
       </ul>
     </nav>
