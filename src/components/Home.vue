@@ -3,7 +3,7 @@
     <nav>
       <ul id="menu-list">
         <router-link class="link" v-for="item in menu" v-bind:key="item.id" v-bind:to="item.path">
-          <Card class="menu-item" v-bind:title="item.title" v-bind:logo="item.logo"/>
+          <Card class="menu-item" v-bind:title="$t(item.titleIntlId)" v-bind:logo="item.logo"/>
         </router-link>
       </ul>
     </nav>
@@ -16,31 +16,31 @@ import Card from "./Card.vue";
 const menu = [
   {
     id: 0,
-    title: "Emergency numbers",
+    titleIntlId: "menu.numbers",
     logo: "911.svg",
     path: "/emergency-numbers"
   },
   {
     id: 1,
-    title: "Emergency contacts",
+    titleIntlId: "menu.contacts",
     logo: "phone-book.svg",
     path: "/emergency-contacts"
   },
   {
     id: 2,
-    title: "Danger alert",
+    titleIntlId: "menu.alert",
     logo: "alert.svg",
     path: "/alert"
   },
   {
     id: 3,
-    title: "Police stations",
+    titleIntlId: "menu.police",
     logo: "police.svg",
     path: "/police"
   },
   {
     id: 4,
-    title: "Hospitals",
+    titleIntlId: "menu.hospitals",
     logo: "hospital.svg",
     path: "/hospitals"
   }

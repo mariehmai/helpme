@@ -1,0 +1,8 @@
+{
+  "app.name": "HelpMe",
+  "menu.numbers": "Numéros d'urgence",
+  "menu.contacts": "Contacts d'urgence",
+  "menu.alert": "Alerte danger",
+  "menu.police": "Stations de police",
+  "menu.hospitals": "Hôpitaux"
+}
