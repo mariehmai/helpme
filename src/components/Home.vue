@@ -16,9 +16,6 @@ import menu from "@/data/menu";
 
 export default {
   name: "Home",
-  props: {
-    msg: String
-  },
   data() {
     return {
       menu
