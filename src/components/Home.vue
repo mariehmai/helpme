@@ -2,9 +2,12 @@
   <div id="home">
     <nav>
       <ul id="menu-list">
-        <router-link class="link" v-for="item in menu" :key="item.id" :to="item.path">
-          <Card class="menu-item" :title="$t(item.titleIntlId)" :logo="item.logo"/>
-        </router-link>
+        <div class="link-container" v-for="item in menu" :key="item.id">
+          <router-link class="link" v-if="item.path" :to="item.path">
+            <Card class="menu-item" :title="$t(item.titleIntlId)" :logo="item.logo"/>
+          </router-link>
+          <Card class="menu-item" v-else :title="$t(item.titleIntlId)" :logo="item.logo"/>
+        </div>
       </ul>
     </nav>
   </div>
@@ -37,10 +40,13 @@ ul {
   justify-content: center;
 }
 
-.link {
+.link-container {
   margin: 20px 10px;
-  text-decoration: none;
   color: var(--v-primary-base);
+}
+
+.link {
+  text-decoration: none;
 }
 
 .menu-item {
