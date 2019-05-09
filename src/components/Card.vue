@@ -1,5 +1,5 @@
 <template>
-  <div v-on:click="onClick" id="card">
+  <div @click="onClick" id="card">
     <img class="img" :alt="logo" :src="require('@/assets/menu/' + logo)">
     <p>{{ title }}</p>
   </div>
@@ -24,7 +24,7 @@ export default {
 }
 
 #card:hover {
-  background-color: var(--v-accent-base);
+  background-color: var(--v-secondary-base);
 }
 
 .img {
