@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import FlagIcon from 'vue-flag-icon'
 
 import i18n from '@/plugins/i18n'
 import router from '@/plugins/router'
@@ -16,7 +15,6 @@ Vue.use(Vuetify, {
     customProperties: true
   }
 })
-Vue.use(FlagIcon)
 
 new Vue({
   el: '#app',
