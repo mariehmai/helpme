@@ -14,8 +14,7 @@ export default [
   {
     id: 2,
     titleIntlId: 'menu.alert',
-    logo: 'alert.svg',
-    path: '/alert'
+    logo: 'alert.svg'
   },
   {
     id: 3,
