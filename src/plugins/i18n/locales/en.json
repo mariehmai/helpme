@@ -4,5 +4,6 @@
   "menu.contacts": "Emergency contacts",
   "menu.alert": "Danger alert",
   "menu.police": "Police stations",
-  "menu.hospitals": "Hospitals"
+  "menu.hospitals": "Hospitals",
+  "alert.title": "Send an alert"
 }

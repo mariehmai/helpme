@@ -22,15 +22,10 @@
 
       <v-dialog v-model="displayAlert" width="500">
         <v-card>
-          <v-card-title class="headline grey lighten-2">Send an alert</v-card-title>
-
-          <AlertOptions/>
-          <v-divider></v-divider>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" flat @click="displayAlert = false">Cancel</v-btn>
-          </v-card-actions>
+          <v-card-title class="dialog-title">
+            <h2>{{$t('alert.title')}}</h2>
+          </v-card-title>
+          <AlertOptions :audio="audio"/>
         </v-card>
       </v-dialog>
     </nav>
@@ -47,8 +42,18 @@ export default {
   data() {
     return {
       menu,
-      displayAlert: false
+      displayAlert: false,
+      audio: null
     };
+  },
+  mounted() {
+    this.audio = new Audio();
+    this.audio.loop = true;
+  },
+  updated() {
+    if (this.displayAlert === false) {
+      this.audio.pause();
+    }
   },
   components: {
     Card,
@@ -84,5 +89,10 @@ ul {
 .menu-item {
   width: 120px;
   height: 100%;
+}
+
+.dialog-title {
+  color: var(--v-primary-base);
+  background-color: var(--v-secondary-base);
 }
 </style>
