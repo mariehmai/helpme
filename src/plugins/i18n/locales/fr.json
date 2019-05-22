@@ -5,5 +5,9 @@
   "menu.alert": "Alerte danger",
   "menu.police": "Stations de police",
   "menu.hospitals": "Hôpitaux",
-  "alert.title": "Envoyer une alerte"
+  "alert.title": "Envoyer une alerte",
+  "service.police": "Police",
+  "service.fire": "Pompiers",
+  "service.ambulance": "Ambulance",
+  "country": "Pays"
 }

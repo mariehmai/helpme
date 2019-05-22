@@ -1,5 +1,7 @@
 <template>
   <div id="emergency-numbers">
+    <h1 class="main-title">{{$t('menu.numbers')}}</h1>
+    <CountryNumbers :country="currentCountry"/>
     <v-card>
       <v-card-title>
         {{$t('menu.numbers')}}
@@ -22,6 +24,9 @@
 </template>
 
 <script>
+import axios from "axios";
+
+import CountryNumbers from "@/components/CountryNumbers";
 import emergencyNumbers from "@/data/mocks/emergencyNumbers";
 
 export default {
@@ -29,6 +34,13 @@ export default {
   data() {
     return {
       search: "",
+      currentCountry: {
+        code: "",
+        police: "",
+        fire: "",
+        ambulance: "",
+        name: ""
+      },
       emergencyNumbers: emergencyNumbers.data.map(country => {
         const formattedCountryName = country.Country.Name.split(" ")
           .join("-")
@@ -52,24 +64,51 @@ export default {
       }),
       headers: [
         {
-          text: "Countries",
+          text: this.$i18n.t("country"),
           value: "countryName"
         },
-        { text: "Police", align: "right", sortable: false, value: "police" },
         {
-          text: "Fire brigade",
+          text: this.$i18n.t("service.police"),
+          align: "right",
+          sortable: false,
+          value: "police"
+        },
+        {
+          text: this.$i18n.t("service.fire"),
           align: "right",
           sortable: false,
           value: "fire"
         },
         {
-          text: "Ambulance",
+          text: this.$i18n.t("service.ambulance"),
           align: "right",
           sortable: false,
           value: "ambulance"
         }
       ]
     };
+  },
+  mounted() {
+    const IP_API_URL =
+      "http://ip-api.com/json/80.201.88.121?fields=countryCode";
+    axios.get(IP_API_URL).then(response => {
+      const country = emergencyNumbers.data.find(
+        country =>
+          country.Country.ISOCode.toLowerCase() ===
+          response.data.countryCode.toLowerCase()
+      );
+
+      this.currentCountry = {
+        code: response.data.countryCode,
+        police: country.Police.All[0],
+        ambulance: country.Ambulance.All[0],
+        fire: country.Fire.All[0],
+        name: country.Country.Name
+      };
+    });
+  },
+  components: {
+    CountryNumbers
   }
 };
 </script>

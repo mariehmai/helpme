@@ -48,6 +48,11 @@ body {
   border-radius: 8px;
 }
 
+.main-title {
+  font-size: 32px;
+  padding: 20px 0;
+}
+
 #app-container {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
