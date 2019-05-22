@@ -92,7 +92,11 @@ ul {
 }
 
 .dialog-title {
-  color: var(--v-primary-base);
-  background-color: var(--v-secondary-base);
+  color: var(--v-contrast-base);
+  background-image: linear-gradient(
+    -225deg,
+    var(--v-reverse-base) 0%,
+    var(--v-reverse-darken1) 100%
+  );
 }
 </style>

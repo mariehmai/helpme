@@ -27,14 +27,25 @@ export default {
 
 <style>
 body {
-  background-color: var(--v-background-base);
+  background-image: linear-gradient(
+    -225deg,
+    var(--v-background-base) 0%,
+    var(--v-background-darken1) 100%
+  );
 }
 
-button {
-  padding: 8px;
-  border: 1px solid var(--v-secondary-base);
+.v-chip__content {
+  background-image: linear-gradient(
+    -225deg,
+    var(--v-contrast-base) 0%,
+    var(--v-contrast-darken1) 100%
+  );
+}
+
+.v-card,
+.v-datatable__actions,
+.v-table {
   border-radius: 8px;
-  margin: 6px;
 }
 
 #app-container {
@@ -43,6 +54,7 @@ button {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: var(--v-primary-base);
+  background: transparent;
   padding: 0 20px;
   max-width: 850px;
   margin: auto;

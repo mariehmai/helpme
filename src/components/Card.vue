@@ -1,6 +1,11 @@
 <template>
   <v-hover>
-    <div @click="onClick" id="card" slot-scope="{ hover }" :class="`elevation-${hover ? 6 : 2}`">
+    <div
+      @click="onClick"
+      id="card"
+      slot-scope="{ hover }"
+      :class="`elevation-${hover ? 6 : outlined ? 0 : 2} ${outlined ? 'outlined' : ''}`"
+    >
       <img class="img" :alt="logo" :src="logo">
       <p>{{ title }}</p>
     </div>
@@ -13,6 +18,7 @@ export default {
   props: {
     title: { type: String, required: true },
     logo: { type: String, required: true },
+    outlined: { type: Boolean, default: false },
     onClick: { type: Function, default: () => {} }
   }
 };
@@ -28,12 +34,19 @@ p {
   border-radius: 8px;
   box-shadow: 2px 2px 4px var(--v-grey-base);
   padding: 14px;
+  background-image: linear-gradient(
+    -225deg,
+    var(--v-contrast-base) 0%,
+    var(--v-contrast-darken1) 100%
+  );
 }
 
 #card:hover {
-  background-color: var(--v-secondary-base);
-  color: var(--v-background-base);
-  font-weight: 600;
+  font-weight: 500;
+}
+
+#card.outlined {
+  background: transparent;
 }
 
 .img {

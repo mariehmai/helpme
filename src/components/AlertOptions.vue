@@ -4,6 +4,7 @@
       v-for="option in alertOptions"
       :key="option.type"
       class="alert-option"
+      outlined
       :onClick="() => playSound(option)"
       :title="option.title"
       :logo="require(`@/assets/alert/${option.logo}`)"
@@ -50,6 +51,12 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  background-image: linear-gradient(
+    -225deg,
+    var(--v-background-base) 0%,
+    var(--v-background-darken1) 100%
+  );
+  padding: 10px;
 }
 
 .alert-option {
