@@ -13,9 +13,5 @@ export default {
     base: '#ffffff',
     darken1: '#F5FFFD'
   },
-  reverse: {
-    base: '#00cdac',
-    darken1: '#8ddad5'
-  },
   grey: '#b0bec5'
 }
