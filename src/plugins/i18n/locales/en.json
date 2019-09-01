@@ -2,8 +2,6 @@
   "app.name": "HelpMe",
   "menu.numbers": "Emergency numbers",
   "menu.contacts": "Emergency contacts",
-  "menu.alert": "Danger alert",
   "menu.police": "Police stations",
-  "menu.hospitals": "Hospitals",
-  "alert.title": "Send an alert"
+  "menu.hospitals": "Hospitals"
 }
