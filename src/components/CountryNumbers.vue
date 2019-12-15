@@ -29,13 +29,13 @@ export default {
     country: {
       type: Object,
       required: true,
-      default: {
+      default: () => ({
         code: "",
         police: "",
         fire: "",
         ambulance: "",
         name: ""
-      }
+      })
     }
   }
 };

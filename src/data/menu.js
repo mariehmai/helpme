@@ -13,17 +13,12 @@ export default [
   },
   {
     id: 2,
-    titleIntlId: 'menu.alert',
-    logo: 'alert.svg'
-  },
-  {
-    id: 3,
     titleIntlId: 'menu.police',
     logo: 'police.svg',
     path: '/police'
   },
   {
-    id: 4,
+    id: 3,
     titleIntlId: 'menu.hospitals',
     logo: 'hospital.svg',
     path: '/hospitals'
