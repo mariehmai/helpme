@@ -3,6 +3,8 @@
   "home.needHelp": "¿Necesito ayuda?",
   "home.description": "Esta página le da información básica para situaciones de emergencia.",
   "menu.numbers": "Números de emergencia",
+  "menu.home": "Inicio",
+  "menu.about": "Acerca de",
   "service.police": "Policía",
   "service.fire": "Bomberos",
   "service.ambulance": "Ambulancia",

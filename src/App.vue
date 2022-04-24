@@ -5,15 +5,14 @@ import IntroductionSection from "@/components/IntroductionSection.vue";
 </script>
 
 <template>
-  <header>
+  <header class="max-h-[100vh] lg:flex lg:place-items-center pr-[6rem] gap-10">
     <LanguageSelector />
-    <img alt="Puzzled emoji" class="logo" src="@/assets/puzzled.gif" width="125" height="125" />
-    <div class="wrapper">
+    <img alt="Puzzled emoji" class="block mt-0 mx-auto mb-8" src="@/assets/puzzled.gif" width="125" height="125" />
+    <div class="flex place-items-start flex-wrap">
       <IntroductionSection msg="home.needHelp" />
-
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">{{ $t("menu.home") }}</RouterLink>
+        <RouterLink to="/about">{{ $t("menu.about") }}</RouterLink>
       </nav>
     </div>
   </header>
@@ -23,37 +22,6 @@ import IntroductionSection from "@/components/IntroductionSection.vue";
 
 <style>
 @import "@/assets/base.css";
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
-}
-
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
 
 nav {
   width: 100%;
@@ -81,33 +49,6 @@ nav a:first-of-type {
 }
 
 @media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
   nav {
     text-align: left;
     margin-left: -1rem;

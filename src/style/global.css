@@ -3,17 +3,34 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply lg:flex lg:h-full;
+  }
+
   select {
-    @apply appearance-none py-2 px-3 border-2 border-emerald-700 rounded-lg cursor-pointer focus:outline-emerald-400;
+    @apply appearance-none py-2 px-3 border-2 border-teal-700 rounded-lg cursor-pointer focus:outline-teal-400;
   }
 
   h1 {
-    font-weight: 500;
-    font-size: 2.6rem;
+    @apply font-bold text-3xl;
+  }
+
+  h2 {
+    @apply text-2xl;
   }
 
   h3 {
     font-size: 1.2rem;
+  }
+
+  a {
+    @apply text-teal-500 hover:bg-teal-100;
+    transition: 0.4s;
+}
+
+  #app {
+    @apply max-w-[1280px] mx-auto p-8 font-normal;
+    @apply lg:grid lg:grid-cols-2 px-8;
   }
 }
 

@@ -3,6 +3,8 @@
   "home.needHelp": "Need some help?",
   "home.description": "This page gives you basic information for emergency situations.",
   "menu.numbers": "Emergency numbers",
+  "menu.home": "Home",
+  "menu.about": "About",
   "service.police": "Police",
   "service.fire": "Fire brigade",
   "service.ambulance": "Ambulance",
