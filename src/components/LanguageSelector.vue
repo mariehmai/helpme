@@ -1,5 +1,5 @@
 <template>
-  <div class="locale-selector">
+  <div class="locale-selector absolute right-0 top-0">
     <select v-model="selected" v-on:change="changeLocale">
       <option v-for="lang in languages" :key="lang.locale" :value="lang">
         {{ lang.title }}
@@ -33,21 +33,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  padding: 8px;
-  border-radius: 8px;
-}
-
-
-.locale-selector {
-  z-index: 100;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-</style>
