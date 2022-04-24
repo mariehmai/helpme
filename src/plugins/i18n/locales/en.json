@@ -1,0 +1,10 @@
+{
+  "app.name": "HelpMe",
+  "home.needHelp": "Need some help?",
+  "home.description": "This page gives you basic information for emergency situations.",
+  "menu.numbers": "Emergency numbers",
+  "service.police": "Police",
+  "service.fire": "Fire brigade",
+  "service.ambulance": "Ambulance",
+  "country": "Country"
+}

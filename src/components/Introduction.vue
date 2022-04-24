@@ -6,8 +6,8 @@ defineProps<{
 
 <template>
   <div class="introduction">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>This page gives you basic information for emergency situations.</h3>
+    <h1 class="green">{{ $t(msg) }}</h1>
+    <h3>{{ $t("home.description") }}</h3>
   </div>
 </template>
 
