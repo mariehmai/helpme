@@ -17,7 +17,7 @@
         <h1>{{country.ambulance}}</h1>
       </div>
     </div>
-    <v-divider/>
+    <br />
     <h2>{{country.name}}</h2>
   </div>
 </template>

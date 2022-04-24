@@ -1,9 +1,10 @@
 <template>
   <div id="language-select">
-    <v-combobox v-model="languageSelected" :items="languages.map(l => l.title)">
+    Yo
+    <!-- <div v-model="languageSelected" :items="languages.map(l => l.title)">
       <template v-slot:selection="data">
-        <v-hover>
-          <v-chip
+        <div>
+          <div
             class="chip"
             :key="JSON.stringify(data.item)"
             :selected="data.selected"
@@ -19,10 +20,10 @@
               >
             </v-avatar>
             {{ data.item.slice(0, 2).toUpperCase() }}
-          </v-chip>
-        </v-hover>
+          </div>
+        </div>
       </template>
-    </v-combobox>
+    </div> -->
   </div>
 </template>
 

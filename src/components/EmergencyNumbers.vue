@@ -2,24 +2,24 @@
   <div id="emergency-numbers">
     <h1 class="main-title">{{$t('menu.numbers')}}</h1>
     <CountryNumbers :country="currentCountry"/>
-    <v-card>
-      <v-card-title>
+    <div>
+      <div>
         {{$t('menu.numbers')}}
-        <v-spacer></v-spacer>
-        <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
-      </v-card-title>
-      <v-data-table :headers="headers" :items="emergencyNumbers" :search="search">
-        <template v-slot:items="props">
+        <div></div>
+        <input v-model="search" append-icon="search" label="Search" single-line hide-details />
+      </div>
+      <table :headers="headers" :items="emergencyNumbers" :search="search">
+        <div>
           <td class="text-xs-left country">
             <img :alt="props.item.flag" :src="props.item.flag">
             {{ props.item.countryName }}
           </td>
-          <!-- <td class="text-xs-right">{{ props.item.police }}</td>
+           <t d class="text-xs-right">{{ props.item.police }}</t>
           <td class="text-xs-right">{{ props.item.fire }}</td>
-          <td class="text-xs-right">{{ props.item.ambulance }}</td> -->
-        </template>
-      </v-data-table>
-    </v-card>
+          <td class="text-xs-right">{{ props.item.ambulance }}</td>
+        </div>
+      </table>
+    </div>
   </div>
 </template>
 

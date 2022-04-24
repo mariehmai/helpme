@@ -1,5 +1,5 @@
 <template>
-  <v-hover>
+  <div>
     <div
       @click="onClick"
       id="card"
@@ -9,7 +9,7 @@
       <img class="img" :alt="logo" :src="logo">
       <p>{{ title }}</p>
     </div>
-  </v-hover>
+  </div>
 </template>
 
 <script>

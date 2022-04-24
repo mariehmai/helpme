@@ -1,12 +1,12 @@
 <template>
-  <v-app id="app-container">
+  <div id="app-container">
     <LanguageSelect/>
     <div class="logo-container">
       <img @click="goBack" alt="HelpMe logo" src="@/assets/logo.svg">
       <h1>{{$t("app.name")}}</h1>
     </div>
-    <router-view></router-view>
-  </v-app>
+     <router-view></router-view>
+  </div>
 </template>
 
 <script>
