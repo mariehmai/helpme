@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-import Introduction from "@/components/Introduction.vue";
+import IntroductionSection from "@/components/IntroductionSection.vue";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import Introduction from "@/components/Introduction.vue";
     <img alt="Puzzled emoji" class="logo" src="@/assets/puzzled.gif" width="125" height="125" />
 
     <div class="wrapper">
-      <Introduction msg="home.needHelp" />
+      <IntroductionSection msg="home.needHelp" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
