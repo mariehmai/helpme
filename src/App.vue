@@ -7,7 +7,13 @@ import IntroductionSection from "@/components/IntroductionSection.vue";
 <template>
   <header class="max-h-[100vh] lg:flex lg:place-items-center pr-[6rem] gap-10">
     <LanguageSelector />
-    <img alt="Puzzled emoji" class="block mt-0 mx-auto mb-8" src="@/assets/puzzled.gif" width="125" height="125" />
+    <img
+      alt="Puzzled emoji"
+      class="block mt-0 mx-auto mb-8"
+      src="@/assets/puzzled.gif"
+      width="125"
+      height="125"
+    />
     <div class="flex place-items-start flex-wrap">
       <IntroductionSection msg="home.needHelp" />
       <nav>

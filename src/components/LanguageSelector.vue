@@ -29,7 +29,10 @@ export default defineComponent({
     return { t, n };
   },
   data() {
-    return { languages, selected: languages.find(lang => lang.locale === this.$i18n.locale) };
+    return {
+      languages,
+      selected: languages.find((lang) => lang.locale === this.$i18n.locale),
+    };
   },
 });
 </script>

@@ -12,7 +12,11 @@ import emergencyNumbers from "../data/emergencyNumbers.json";
     <h3 class="text-center font-semibold">{{ $t("service.fire") }}</h3>
   </span>
   <ul class="max-h-[80vh] lg:max-h-[75vh] overflow-auto gap-2 flex flex-col">
-    <li class="grid grid-cols-4 lg:grid-cols-5" v-for="number in numbers" :key="number.Country.Name">
+    <li
+      class="grid grid-cols-4 lg:grid-cols-5"
+      v-for="number in numbers"
+      :key="number.Country.Name"
+    >
       <span class="lg:col-span-2">
         {{ number.Country.ISOCode }} - {{ number.Country.Name }}
       </span>
