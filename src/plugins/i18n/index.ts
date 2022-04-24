@@ -4,14 +4,30 @@ import en from "./locales/en.json";
 import es from "./locales/es.json";
 import fr from "./locales/fr.json";
 
-const messages = {
-  en,
-  es,
-  fr,
-};
+export const languages = [
+  {
+    flag: "uk",
+    locale: "en",
+    title: "English",
+  },
+  {
+    flag: "es",
+    locale: "es",
+    title: "Español",
+  },
+  {
+    flag: "fr",
+    locale: "fr",
+    title: "Français",
+  },
+];
 
 export const i18n = createI18n({
   locale: "en",
   fallbackLocale: "fr",
-  messages,
+  messages: {
+    en,
+    es,
+    fr,
+  },
 });

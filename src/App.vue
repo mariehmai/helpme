@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
+import LanguageSelector from "@/components/LanguageSelector.vue";
 import IntroductionSection from "@/components/IntroductionSection.vue";
 </script>
 
 <template>
   <header>
+    <LanguageSelector />
     <img alt="Puzzled emoji" class="logo" src="@/assets/puzzled.gif" width="125" height="125" />
-
     <div class="wrapper">
       <IntroductionSection msg="home.needHelp" />
 
