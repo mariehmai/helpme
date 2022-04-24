@@ -14,9 +14,9 @@
             <img :alt="props.item.flag" :src="props.item.flag">
             {{ props.item.countryName }}
           </td>
-          <td class="text-xs-right">{{ props.item.police }}</td>
+          <!-- <td class="text-xs-right">{{ props.item.police }}</td>
           <td class="text-xs-right">{{ props.item.fire }}</td>
-          <td class="text-xs-right">{{ props.item.ambulance }}</td>
+          <td class="text-xs-right">{{ props.item.ambulance }}</td> -->
         </template>
       </v-data-table>
     </v-card>

@@ -2,8 +2,6 @@
   "app.name": "HelpMe",
   "menu.numbers": "Números de emergencia",
   "menu.contacts": "Contactos de emergencia",
-  "menu.police": "Estaciones de policía",
-  "menu.hospitals": "Hospitales",
   "service.police": "Policía",
   "service.fire": "Bomberos",
   "service.ambulance": "Ambulancia",
