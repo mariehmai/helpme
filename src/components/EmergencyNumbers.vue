@@ -3,9 +3,7 @@ import emergencyNumbers from "../data/emergencyNumbers.json";
 </script>
 
 <template>
-  <div class="flex flex-row justify-between gap-2 overflow-x-scroll px-1 py-2">
-    <input v-model="countrySearch" placeholder="🔍 Search... e.g. france" />
-  </div>
+  <input v-model="countrySearch" placeholder="🔍 Search... e.g. france" />
   <div class="border-t border border-slate-100 mt-3 mb-6" />
   <span class="grid grid-cols-4 lg:grid-cols-5 mb-2">
     <h3 class="lg:col-span-2 font-semibold">{{ $t("country") }}</h3>
