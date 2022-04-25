@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import emergencyNumbers from "../data/emergencyNumbers.json";
+import emergencyNumbers from "@/data/emergencyNumbers.json";
 </script>
 
 <template>
   <div class="mt-4 lg:mt-0 flex flex-col sm:flex-row justify-between items-start gap-2">
     <h2 class="font-semibold">{{ $t("menu.numbers") }}</h2>
-    <input v-model="countrySearch" placeholder="🔍 Search... e.g. france" />
+    <input :value="countrySearch" @input="countrySearch = $event.target.value" placeholder="🔍 Search... e.g. france" />
   </div>
   <div class="border-t border border-slate-100 mt-3 mb-6" />
   <span class="grid grid-cols-4 lg:grid-cols-5 mb-2">
@@ -39,18 +39,29 @@ import emergencyNumbers from "../data/emergencyNumbers.json";
 <script lang="ts">
 export default {
   name: "emergency-numbers",
-  watch: {
-    countrySearch(newSearch: string) {
-      this.numbers = newSearch ? emergencyNumbers.data.filter(
-        number => number.Country.Name.toLowerCase()
-          .includes(newSearch.toLowerCase())) : emergencyNumbers.data
-    }
-  },
   data() {
     return {
       countrySearch: "",
       numbers: emergencyNumbers.data,
     };
+  },
+  watch: {
+    countrySearch(newSearch: string) {
+      if (newSearch === "") {
+        this.numbers = emergencyNumbers.data;
+      } else {
+        this.filterNumbers();
+      }
+    },
+  },
+  methods: {
+    filterNumbers() {
+      this.numbers = emergencyNumbers.data.filter((number) =>
+        number.Country.Name.toLowerCase().includes(
+          this.countrySearch.toLowerCase()
+        )
+      );
+    },
   },
 };
 </script>
