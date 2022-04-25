@@ -3,10 +3,12 @@
   "home.needHelp": "Besoin d'aide?",
   "home.description": "Cette page vous donne des informations de base pour les situations d'urgence.",
   "menu.numbers": "Numéros d'urgence",
+  "menu.firstAid": "Gestes de premier secours",
   "menu.home": "Accueil",
   "menu.about": "A propos",
   "service.police": "Police",
   "service.fire": "Pompiers",
   "service.ambulance": "Ambulance",
-  "country": "Pays"
+  "country": "Pays",
+  "countryUnavailable": "Données d'urgence indisponibles pour le pays {country}."
 }

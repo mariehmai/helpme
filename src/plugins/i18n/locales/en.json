@@ -3,10 +3,12 @@
   "home.needHelp": "Need some help?",
   "home.description": "This page gives you basic information for emergency situations.",
   "menu.numbers": "Emergency numbers",
+  "menu.firstAid": "First aid actions",
   "menu.home": "Home",
   "menu.about": "About",
   "service.police": "Police",
   "service.fire": "Fire brigade",
   "service.ambulance": "Ambulance",
-  "country": "Country"
+  "country": "Country",
+  "countryUnavailable": "Emergency data is unavailable for {country} country."
 }

@@ -8,7 +8,7 @@
   }
 
   select {
-    @apply appearance-none py-2 px-3 border-2 border-teal-700 rounded-lg cursor-pointer focus:outline-teal-400;
+    @apply appearance-none py-2 px-3 border-2 border-teal-700 rounded-lg cursor-pointer focus:focus-base;
   }
 
   h1 {
@@ -26,7 +26,11 @@
   a {
     @apply text-teal-500 hover:bg-teal-100;
     transition: 0.4s;
-}
+  }
+
+  input {
+    @apply py-2 px-3 rounded-md outline outline-teal-600 focus:focus-base;
+  }
 
   #app {
     @apply max-w-[1280px] mx-auto p-8 font-normal;
@@ -35,6 +39,14 @@
 }
 
 @layer utilities {
+  .focus-base {
+    @apply outline-none ring-2 ring-teal-400;
+  }
+
+  .ellipsis {
+    @apply text-ellipsis overflow-auto whitespace-nowrap;
+  }
+
   .text-left-center {
     @apply text-left sm:text-center;
   }
