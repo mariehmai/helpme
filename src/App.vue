@@ -5,65 +5,60 @@ import IntroductionSection from "@/components/IntroductionSection.vue";
 </script>
 
 <template>
-  <header class="max-h-[100vh] lg:flex lg:place-items-center pr-[6rem] gap-10">
-    <div class="fixed top-8 left-8 z-50">
+  <div class="min-h-screen w-full bg-white dark:bg-gray-900">
+    <!-- Fixed Language Selector -->
+    <div class="fixed top-4 left-8 z-50">
       <LanguageSelector />
     </div>
-    <img
-      alt="Puzzled emoji"
-      class="block mt-0 mx-auto mb-8"
-      src="@/assets/puzzled.gif"
-      width="125"
-      height="125"
-    />
-    <div class="flex place-items-start flex-wrap">
-      <IntroductionSection msg="home.needHelp" />
-      <nav>
-        <RouterLink to="/">{{ $t("menu.home") }}</RouterLink>
-        <RouterLink to="/about">{{ $t("menu.about") }}</RouterLink>
-      </nav>
-    </div>
-  </header>
 
-  <RouterView />
+    <!-- Main Header -->
+    <header class="w-full px-4 lg:px-8 pt-16">
+      <!-- Navigation -->
+      <nav
+        class="flex justify-center lg:justify-start gap-2 text-sm lg:text-base mb-6"
+      >
+        <RouterLink to="/" class="nav-link">
+          {{ $t("menu.home") }}
+        </RouterLink>
+        <RouterLink to="/about" class="nav-link">
+          {{ $t("menu.about") }}
+        </RouterLink>
+      </nav>
+    </header>
+
+    <!-- Introduction Section -->
+    <section class="w-full px-4 lg:px-8 pb-6 text-center">
+      <IntroductionSection msg="home.needHelp" />
+    </section>
+
+    <!-- Main Content -->
+    <main class="w-full px-4 lg:px-8 pb-8">
+      <RouterView />
+    </main>
+  </div>
 </template>
 
 <style>
 @import "@/assets/base.css";
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+/* Professional navigation styling */
+.nav-link {
+  @apply inline-block px-6 py-3 font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 transition-all duration-200 hover:bg-teal-50 dark:hover:bg-gray-700 hover:text-teal-700 dark:hover:text-teal-400 hover:border-teal-300 dark:hover:border-teal-600;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.nav-link:first-child {
+  @apply rounded-l-lg;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.nav-link:last-child {
+  @apply rounded-r-lg border-l-0 dark:border-l-0;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.nav-link.router-link-exact-active {
+  @apply bg-teal-600 text-white border-teal-600 font-semibold shadow-sm;
 }
 
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.nav-link.router-link-exact-active:hover {
+  @apply bg-teal-700 border-teal-700;
 }
 </style>

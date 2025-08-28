@@ -1,39 +1,40 @@
 <template>
-  <div class="max-w-7xl mx-auto">
-    <div class="flex flex-col gap-4">
+  <div class="w-full px-4 md:px-8 py-8">
+    <div class="flex flex-col gap-6">
+      <!-- Header Section -->
       <div class="flex items-center justify-between flex-wrap">
         <h2
-          class="flex items-center gap-2 text-3xl font-bold text-gray-900 dark:text-gray-100"
+          class="flex items-center gap-3 text-3xl font-bold text-gray-900 dark:text-white"
         >
-          <span class="text-4xl">🚨</span>
           {{ $t("menu.numbers") }}
           <span
-            class="text-sm font-normal text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full"
+            class="text-sm font-normal text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700"
           >
             {{ filteredNumbers.length }} {{ $t("countries") }}
           </span>
         </h2>
       </div>
 
+      <!-- Search and Filters -->
       <div class="flex flex-col gap-4">
         <div class="flex gap-4 items-center flex-wrap">
           <div class="relative flex-1 max-w-md">
             <span
-              class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 pointer-events-none"
+              class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none"
             >
               🔍
             </span>
             <input
               v-model="searchQuery"
               :placeholder="$t('search.placeholder')"
-              class="w-full pl-10 pr-10 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-lg text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-all duration-200 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+              class="w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-lg text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-all duration-200 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
               @input="onSearchInput"
               autocomplete="off"
             />
             <button
               v-if="searchQuery"
               @click="clearSearch"
-              class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-none border-none text-gray-500 dark:text-gray-400 cursor-pointer p-1 rounded-full transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-none border-none text-gray-400 dark:text-gray-500 cursor-pointer p-1 rounded-full transition-colors duration-200 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
               :aria-label="$t('search.clear')"
             >
               ✕
@@ -41,16 +42,17 @@
           </div>
         </div>
 
-        <div class="flex gap-2 flex-wrap justify-center sm:justify-start">
+        <!-- Service Filter Buttons -->
+        <div class="flex gap-3 flex-wrap justify-center sm:justify-start">
           <button
             v-for="service in serviceTypes"
             :key="service.key"
             @click="toggleServiceFilter(service.key)"
-            class="px-4 py-2 border-2 rounded-full cursor-pointer transition-all duration-200 text-sm font-medium"
+            class="px-4 py-2 border rounded-lg cursor-pointer transition-all duration-200 text-sm font-medium"
             :class="
               activeFilters.includes(service.key)
-                ? 'bg-emerald-500 border-emerald-500 text-white'
-                : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
+                ? 'bg-teal-600 border-teal-600 text-white shadow-md'
+                : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-teal-500 hover:bg-teal-50 dark:hover:bg-gray-700'
             "
             :title="$t(service.i18nKey)"
           >
@@ -60,16 +62,19 @@
       </div>
     </div>
 
+    <!-- Divider -->
     <div class="h-px bg-gray-200 dark:bg-gray-700 my-8"></div>
 
-    <div class="space-y-4">
+    <!-- Emergency Numbers Table -->
+    <div class="w-full space-y-3">
+      <!-- Desktop Header -->
       <div
-        class="hidden lg:grid grid-cols-5 gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg font-semibold text-gray-900 dark:text-gray-100"
+        class="hidden lg:grid grid-cols-5 gap-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg font-semibold text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700"
       >
         <div class="col-span-2 flex items-center">
           <button
             @click="toggleSort('country')"
-            class="bg-none border-none text-gray-900 dark:text-gray-100 cursor-pointer flex items-center gap-2 font-semibold text-base"
+            class="bg-none border-none text-gray-900 dark:text-gray-100 cursor-pointer flex items-center gap-2 font-semibold text-base hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
           >
             {{ $t("country") }}
             <span
@@ -90,12 +95,13 @@
         </div>
       </div>
 
+      <!-- Mobile Header -->
       <div
-        class="lg:hidden p-4 bg-gray-50 dark:bg-gray-800 rounded-lg font-semibold text-gray-900 dark:text-gray-100"
+        class="lg:hidden p-4 bg-gray-100 dark:bg-gray-800 rounded-lg font-semibold text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700"
       >
         <button
           @click="toggleSort('country')"
-          class="bg-none border-none text-gray-900 dark:text-gray-100 cursor-pointer flex items-center gap-2 font-semibold text-base"
+          class="bg-none border-none text-gray-900 dark:text-gray-100 cursor-pointer flex items-center gap-2 font-semibold text-base hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
         >
           {{ $t("country") }}
           <span
@@ -106,29 +112,32 @@
         </button>
       </div>
 
+      <!-- No Results State -->
       <div v-if="filteredNumbers.length === 0" class="text-center py-16">
-        <div class="text-6xl mb-4">🔍</div>
+        <div class="text-6xl mb-4 opacity-50">🔍</div>
         <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
           {{ $t("noResults.title") }}
         </h3>
-        <p class="text-gray-600 dark:text-gray-400 mb-4">
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
           {{ $t("noResults.message") }}
         </p>
         <button
           @click="clearAllFilters"
-          class="mt-4 px-6 py-3 bg-emerald-500 text-white border-none rounded-lg cursor-pointer font-medium transition-colors duration-200 hover:bg-emerald-600"
+          class="px-6 py-3 bg-teal-600 text-white border-none rounded-lg cursor-pointer font-medium transition-all duration-200 hover:bg-teal-700 shadow-md hover:shadow-lg"
         >
           {{ $t("noResults.clearFilters") }}
         </button>
       </div>
 
-      <div v-else class="flex flex-col gap-2">
+      <!-- Countries List -->
+      <div v-else class="w-full space-y-2">
+        <!-- Desktop View -->
         <div
           v-for="(country, index) in paginatedNumbers"
           :key="country.Country.Name"
-          class="hidden lg:grid grid-cols-5 gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 items-center hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-lg"
+          class="hidden lg:grid grid-cols-5 gap-4 p-4 rounded-lg cursor-pointer transition-all duration-200 items-center hover:bg-gray-100 dark:hover:bg-gray-800 hover:-translate-y-0.5"
           :class="{
-            'bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 -translate-y-0.5 shadow-lg':
+            'bg-gray-100 dark:bg-gray-800 -translate-y-0.5':
               highlightedIndex === index,
           }"
           @click="selectCountry(country)"
@@ -139,7 +148,7 @@
             <div class="flex items-center gap-2 text-xl">
               {{ getCountryFlag(country.Country.ISOCode) }}
               <span
-                class="text-xs font-semibold text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
+                class="text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded border border-gray-200 dark:border-gray-600"
               >
                 {{ country.Country.ISOCode }}
               </span>
@@ -155,7 +164,7 @@
           <div class="text-center">
             <a
               :href="`tel:${country.Ambulance.All[0]}`"
-              class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 hover:bg-emerald-600 hover:text-white"
+              class="text-teal-600 dark:text-teal-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-teal-600 hover:text-white inline-block"
               @click.stop
               :title="$t('callService', { service: $t('service.ambulance') })"
             >
@@ -166,7 +175,7 @@
           <div class="text-center">
             <a
               :href="`tel:${country.Police.All[0]}`"
-              class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 hover:bg-emerald-600 hover:text-white"
+              class="text-blue-600 dark:text-blue-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-blue-600 hover:text-white inline-block"
               @click.stop
               :title="$t('callService', { service: $t('service.police') })"
             >
@@ -177,7 +186,7 @@
           <div class="text-center">
             <a
               :href="`tel:${country.Fire.All[0]}`"
-              class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 hover:bg-emerald-600 hover:text-white"
+              class="text-purple-600 dark:text-purple-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-purple-600 hover:text-white inline-block"
               @click.stop
               :title="$t('callService', { service: $t('service.fire') })"
             >
@@ -186,12 +195,13 @@
           </div>
         </div>
 
+        <!-- Mobile View -->
         <div
           v-for="(country, index) in paginatedNumbers"
           :key="`mobile-${country.Country.Name}`"
-          class="lg:hidden p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-lg"
+          class="lg:hidden p-4 rounded-lg cursor-pointer transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 hover:-translate-y-0.5"
           :class="{
-            'bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 -translate-y-0.5 shadow-lg':
+            'bg-gray-100 dark:bg-gray-800 -translate-y-0.5':
               highlightedIndex === index,
           }"
           @click="selectCountry(country)"
@@ -202,7 +212,7 @@
             <div class="flex items-center gap-2 text-xl">
               {{ getCountryFlag(country.Country.ISOCode) }}
               <span
-                class="text-xs font-semibold text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
+                class="text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded border border-gray-200 dark:border-gray-600"
               >
                 {{ country.Country.ISOCode }}
               </span>
@@ -217,12 +227,12 @@
 
           <div class="grid grid-cols-3 gap-4">
             <div class="text-center">
-              <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">
+              <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">
                 🚑
               </div>
               <a
                 :href="`tel:${country.Ambulance.All[0]}`"
-                class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600 hover:text-white block"
+                class="text-teal-600 dark:text-teal-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-teal-600 hover:text-white block"
                 @click.stop
                 :title="$t('callService', { service: $t('service.ambulance') })"
               >
@@ -231,12 +241,12 @@
             </div>
 
             <div class="text-center">
-              <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">
+              <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">
                 👮
               </div>
               <a
                 :href="`tel:${country.Police.All[0]}`"
-                class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600 hover:text-white block"
+                class="text-blue-600 dark:text-blue-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-blue-600 hover:text-white block"
                 @click.stop
                 :title="$t('callService', { service: $t('service.police') })"
               >
@@ -245,12 +255,12 @@
             </div>
 
             <div class="text-center">
-              <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">
+              <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">
                 🚒
               </div>
               <a
                 :href="`tel:${country.Fire.All[0]}`"
-                class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600 hover:text-white block"
+                class="text-purple-600 dark:text-purple-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-purple-600 hover:text-white block"
                 @click.stop
                 :title="$t('callService', { service: $t('service.fire') })"
               >
@@ -261,6 +271,7 @@
         </div>
       </div>
 
+      <!-- Pagination -->
       <div
         v-if="totalPages > 1"
         class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 p-4"
@@ -268,7 +279,7 @@
         <button
           @click="previousPage"
           :disabled="currentPage === 1"
-          class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700"
+          class="px-6 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer transition-all duration-200 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-teal-500 dark:hover:border-teal-500 font-medium"
         >
           ← {{ $t("pagination.previous") }}
         </button>
@@ -282,13 +293,14 @@
         <button
           @click="nextPage"
           :disabled="currentPage === totalPages"
-          class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700"
+          class="px-6 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer transition-all duration-200 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-teal-500 dark:hover:border-teal-500 font-medium"
         >
           {{ $t("pagination.next") }} →
         </button>
       </div>
     </div>
 
+    <!-- Country Details Modal -->
     <Teleport to="body">
       <div
         v-if="selectedCountry"
@@ -296,38 +308,41 @@
         @click="closeModal"
       >
         <div
-          class="bg-white dark:bg-gray-800 rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto"
+          class="bg-white dark:bg-gray-800 rounded-xl max-w-lg w-full max-h-[80vh] overflow-y-auto border border-gray-200 dark:border-gray-700 shadow-2xl"
           @click.stop
         >
           <div
-            class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700"
+            class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
           >
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
               {{ $t("modal.title", { country: selectedCountry.Country.Name }) }}
             </h3>
             <button
               @click="closeModal"
-              class="bg-none border-none text-2xl cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+              class="bg-none border-none text-xl cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               ✕
             </button>
           </div>
           <div class="p-6">
             <div class="flex flex-col gap-6">
+              <!-- Ambulance Section -->
               <div class="flex gap-4 items-start">
-                <span class="text-4xl">🚑</span>
+                <div
+                  class="w-12 h-12 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center text-teal-600 dark:text-teal-400 text-xl"
+                >
+                  🚑
+                </div>
                 <div class="flex-1">
-                  <h4
-                    class="font-semibold mb-2 text-gray-900 dark:text-gray-100"
-                  >
+                  <h4 class="font-semibold mb-3 text-gray-900 dark:text-white">
                     {{ $t("service.ambulance") }}
                   </h4>
-                  <div class="flex flex-col gap-1">
+                  <div class="flex flex-col gap-2">
                     <a
                       v-for="number in selectedCountry.Ambulance.All"
                       :key="number"
                       :href="`tel:${number}`"
-                      class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 inline-block hover:bg-emerald-600 hover:text-white"
+                      class="text-teal-600 dark:text-teal-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 inline-block hover:bg-teal-600 hover:text-white border border-teal-200 dark:border-teal-800"
                     >
                       {{ number }}
                     </a>
@@ -335,20 +350,23 @@
                 </div>
               </div>
 
+              <!-- Police Section -->
               <div class="flex gap-4 items-start">
-                <span class="text-4xl">👮</span>
+                <div
+                  class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400 text-xl"
+                >
+                  👮
+                </div>
                 <div class="flex-1">
-                  <h4
-                    class="font-semibold mb-2 text-gray-900 dark:text-gray-100"
-                  >
+                  <h4 class="font-semibold mb-3 text-gray-900 dark:text-white">
                     {{ $t("service.police") }}
                   </h4>
-                  <div class="flex flex-col gap-1">
+                  <div class="flex flex-col gap-2">
                     <a
                       v-for="number in selectedCountry.Police.All"
                       :key="number"
                       :href="`tel:${number}`"
-                      class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 inline-block hover:bg-emerald-600 hover:text-white"
+                      class="text-blue-600 dark:text-blue-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 inline-block hover:bg-blue-600 hover:text-white border border-blue-200 dark:border-blue-800"
                     >
                       {{ number }}
                     </a>
@@ -356,20 +374,23 @@
                 </div>
               </div>
 
+              <!-- Fire Section -->
               <div class="flex gap-4 items-start">
-                <span class="text-4xl">🚒</span>
+                <div
+                  class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl"
+                >
+                  🚒
+                </div>
                 <div class="flex-1">
-                  <h4
-                    class="font-semibold mb-2 text-gray-900 dark:text-gray-100"
-                  >
+                  <h4 class="font-semibold mb-3 text-gray-900 dark:text-white">
                     {{ $t("service.fire") }}
                   </h4>
-                  <div class="flex flex-col gap-1">
+                  <div class="flex flex-col gap-2">
                     <a
                       v-for="number in selectedCountry.Fire.All"
                       :key="number"
                       :href="`tel:${number}`"
-                      class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 inline-block hover:bg-emerald-600 hover:text-white"
+                      class="text-purple-600 dark:text-purple-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 inline-block hover:bg-purple-600 hover:text-white border border-purple-200 dark:border-purple-800"
                     >
                       {{ number }}
                     </a>

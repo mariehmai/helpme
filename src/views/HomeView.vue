@@ -3,7 +3,7 @@ import EmergencyNumbers from "@/components/EmergencyNumbers.vue";
 </script>
 
 <template>
-  <main>
+  <div>
     <EmergencyNumbers />
-  </main>
+  </div>
 </template>

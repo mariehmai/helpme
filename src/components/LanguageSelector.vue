@@ -4,7 +4,7 @@
       <button
         ref="buttonRef"
         @click="toggleDropdown"
-        class="flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 text-gray-700 dark:text-gray-300 text-sm min-w-[80px] hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10"
+        class="flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 text-gray-700 dark:text-gray-300 text-sm min-w-[80px] hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/10 shadow-sm"
         :aria-expanded="isOpen"
         aria-haspopup="true"
       >
@@ -36,7 +36,7 @@
           @click="closeDropdown"
         >
           <div
-            class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl backdrop-blur-sm p-2 min-w-[200px] max-h-[300px] overflow-y-auto animate-in slide-in-from-top-2 duration-150"
+            class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl backdrop-blur-sm p-2 min-w-[200px] max-h-[300px] overflow-y-auto"
             :style="dropdownStyle"
             @click.stop
           >
@@ -44,9 +44,9 @@
               v-for="lang in languages"
               :key="lang.locale"
               @click="selectLanguage(lang)"
-              class="flex items-center gap-3 w-full p-3 bg-transparent border-none rounded-lg cursor-pointer transition-all duration-200 text-gray-700 dark:text-gray-300 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              class="flex items-center gap-3 w-full p-3 bg-transparent border-none rounded-lg cursor-pointer transition-all duration-200 text-gray-700 dark:text-gray-300 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
               :class="{
-                'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400':
+                'bg-teal-50 dark:bg-teal-900/20 text-teal-600 dark:text-teal-400':
                   lang.locale === currentLocale,
               }"
             >
@@ -55,7 +55,7 @@
                 <span
                   class="font-medium text-gray-800 dark:text-gray-200"
                   :class="{
-                    'font-semibold text-emerald-600 dark:text-emerald-400':
+                    'font-semibold text-teal-600 dark:text-teal-400':
                       lang.locale === currentLocale,
                   }"
                 >
@@ -69,7 +69,7 @@
               </div>
               <svg
                 v-if="lang.locale === currentLocale"
-                class="text-emerald-500 flex-shrink-0"
+                class="text-teal-500 flex-shrink-0"
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
