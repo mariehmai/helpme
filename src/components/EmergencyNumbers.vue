@@ -1,67 +1,438 @@
-<script setup lang="ts">
-import emergencyNumbers from "@/data/emergencyNumbers.json";
-</script>
-
 <template>
-  <div class="mt-4 lg:mt-0 flex flex-col sm:flex-row justify-between items-start gap-2">
-    <h2 class="font-semibold">{{ $t("menu.numbers") }}</h2>
-    <input :value="countrySearch" @input="countrySearch = $event.target.value" placeholder="🔍 Search... e.g. france" />
+  <div class="max-w-7xl mx-auto p-4">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center justify-between flex-wrap">
+        <h2
+          class="flex items-center gap-2 text-3xl font-bold text-gray-900 dark:text-gray-100"
+        >
+          <span class="text-4xl">🚨</span>
+          {{ $t("menu.numbers") }}
+          <span
+            class="text-sm font-normal text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full"
+          >
+            {{ filteredNumbers.length }} {{ $t("countries") }}
+          </span>
+        </h2>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <div class="flex gap-4 items-center flex-wrap">
+          <div class="relative flex-1 max-w-md">
+            <span
+              class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 pointer-events-none"
+            >
+              🔍
+            </span>
+            <input
+              v-model="searchQuery"
+              :placeholder="$t('search.placeholder')"
+              class="w-full pl-10 pr-10 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-lg text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-all duration-200 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+              @input="onSearchInput"
+              autocomplete="off"
+            />
+            <button
+              v-if="searchQuery"
+              @click="clearSearch"
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-none border-none text-gray-500 dark:text-gray-400 cursor-pointer p-1 rounded-full transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+              :aria-label="$t('search.clear')"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <div class="flex gap-2 flex-wrap justify-center sm:justify-start">
+          <button
+            v-for="service in serviceTypes"
+            :key="service.key"
+            @click="toggleServiceFilter(service.key)"
+            class="px-4 py-2 border-2 rounded-full cursor-pointer transition-all duration-200 text-sm font-medium"
+            :class="
+              activeFilters.includes(service.key)
+                ? 'bg-emerald-500 border-emerald-500 text-white'
+                : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
+            "
+            :title="$t(service.i18nKey)"
+          >
+            {{ service.emoji }} {{ $t(service.i18nKey) }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="h-px bg-gray-200 dark:bg-gray-700 my-8"></div>
+
+    <div class="space-y-4">
+      <div
+        class="grid grid-cols-4 lg:grid-cols-5 gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg font-semibold text-gray-900 dark:text-gray-100"
+      >
+        <div class="lg:col-span-2 flex items-center">
+          <button
+            @click="toggleSort('country')"
+            class="bg-none border-none text-gray-900 dark:text-gray-100 cursor-pointer flex items-center gap-2 font-semibold text-base"
+          >
+            {{ $t("country") }}
+            <span
+              class="text-xs transition-transform duration-200"
+              :class="getSortIconClass('country')"
+              >↕️</span
+            >
+          </button>
+        </div>
+        <div class="text-center flex items-center justify-center">
+          <span>🚑 {{ $t("service.ambulance") }}</span>
+        </div>
+        <div class="text-center flex items-center justify-center">
+          <span>👮 {{ $t("service.police") }}</span>
+        </div>
+        <div class="text-center flex items-center justify-center">
+          <span>🚒 {{ $t("service.fire") }}</span>
+        </div>
+      </div>
+
+      <div v-if="filteredNumbers.length === 0" class="text-center py-16">
+        <div class="text-6xl mb-4">🔍</div>
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+          {{ $t("noResults.title") }}
+        </h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
+          {{ $t("noResults.message") }}
+        </p>
+        <button
+          @click="clearAllFilters"
+          class="mt-4 px-6 py-3 bg-emerald-500 text-white border-none rounded-lg cursor-pointer font-medium transition-colors duration-200 hover:bg-emerald-600"
+        >
+          {{ $t("noResults.clearFilters") }}
+        </button>
+      </div>
+
+      <div v-else class="flex flex-col gap-2">
+        <div
+          v-for="(country, index) in paginatedNumbers"
+          :key="country.Country.Name"
+          class="grid grid-cols-4 lg:grid-cols-5 gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 items-center hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-lg"
+          :class="{
+            'bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 -translate-y-0.5 shadow-lg':
+              highlightedIndex === index,
+          }"
+          @click="selectCountry(country)"
+          :tabindex="0"
+          @keydown="onRowKeydown($event, country)"
+        >
+          <div class="lg:col-span-2 flex items-center gap-3">
+            <div class="flex items-center gap-2 text-xl">
+              {{ getCountryFlag(country.Country.ISOCode) }}
+              <span
+                class="text-xs font-semibold text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
+              >
+                {{ country.Country.ISOCode }}
+              </span>
+            </div>
+            <span
+              class="font-medium text-gray-900 dark:text-gray-100"
+              :title="country.Country.Name"
+            >
+              {{ country.Country.Name }}
+            </span>
+          </div>
+
+          <div class="text-center">
+            <a
+              :href="`tel:${country.Ambulance.All[0]}`"
+              class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 hover:bg-emerald-600 hover:text-white"
+              @click.stop
+              :title="$t('callService', { service: $t('service.ambulance') })"
+            >
+              {{ country.Ambulance.All[0] || "—" }}
+            </a>
+          </div>
+
+          <div class="text-center">
+            <a
+              :href="`tel:${country.Police.All[0]}`"
+              class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 hover:bg-emerald-600 hover:text-white"
+              @click.stop
+              :title="$t('callService', { service: $t('service.police') })"
+            >
+              {{ country.Police.All[0] || "—" }}
+            </a>
+          </div>
+
+          <div class="text-center">
+            <a
+              :href="`tel:${country.Fire.All[0]}`"
+              class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 hover:bg-emerald-600 hover:text-white"
+              @click.stop
+              :title="$t('callService', { service: $t('service.fire') })"
+            >
+              {{ country.Fire.All[0] || "—" }}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div
+        v-if="totalPages > 1"
+        class="flex justify-between items-center mt-8 p-4"
+      >
+        <button
+          @click="previousPage"
+          :disabled="currentPage === 1"
+          class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700"
+        >
+          ← {{ $t("pagination.previous") }}
+        </button>
+
+        <span class="font-medium text-gray-700 dark:text-gray-300">
+          {{
+            $t("pagination.info", { current: currentPage, total: totalPages })
+          }}
+        </span>
+
+        <button
+          @click="nextPage"
+          :disabled="currentPage === totalPages"
+          class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-700"
+        >
+          {{ $t("pagination.next") }} →
+        </button>
+      </div>
+    </div>
+
+    <Teleport to="body">
+      <div
+        v-if="selectedCountry"
+        class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+        @click="closeModal"
+      >
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto"
+          @click.stop
+        >
+          <div
+            class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700"
+          >
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">
+              {{ $t("modal.title", { country: selectedCountry.Country.Name }) }}
+            </h3>
+            <button
+              @click="closeModal"
+              class="bg-none border-none text-2xl cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+            >
+              ✕
+            </button>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-col gap-6">
+              <div class="flex gap-4 items-start">
+                <span class="text-4xl">🚑</span>
+                <div class="flex-1">
+                  <h4
+                    class="font-semibold mb-2 text-gray-900 dark:text-gray-100"
+                  >
+                    {{ $t("service.ambulance") }}
+                  </h4>
+                  <div class="flex flex-col gap-1">
+                    <a
+                      v-for="number in selectedCountry.Ambulance.All"
+                      :key="number"
+                      :href="`tel:${number}`"
+                      class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 inline-block hover:bg-emerald-600 hover:text-white"
+                    >
+                      {{ number }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex gap-4 items-start">
+                <span class="text-4xl">👮</span>
+                <div class="flex-1">
+                  <h4
+                    class="font-semibold mb-2 text-gray-900 dark:text-gray-100"
+                  >
+                    {{ $t("service.police") }}
+                  </h4>
+                  <div class="flex flex-col gap-1">
+                    <a
+                      v-for="number in selectedCountry.Police.All"
+                      :key="number"
+                      :href="`tel:${number}`"
+                      class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 inline-block hover:bg-emerald-600 hover:text-white"
+                    >
+                      {{ number }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex gap-4 items-start">
+                <span class="text-4xl">🚒</span>
+                <div class="flex-1">
+                  <h4
+                    class="font-semibold mb-2 text-gray-900 dark:text-gray-100"
+                  >
+                    {{ $t("service.fire") }}
+                  </h4>
+                  <div class="flex flex-col gap-1">
+                    <a
+                      v-for="number in selectedCountry.Fire.All"
+                      :key="number"
+                      :href="`tel:${number}`"
+                      class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-2 py-1 rounded transition-all duration-200 inline-block hover:bg-emerald-600 hover:text-white"
+                    >
+                      {{ number }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Teleport>
   </div>
-  <div class="border-t border border-slate-100 mt-3 mb-6" />
-  <span class="grid grid-cols-4 lg:grid-cols-5 mb-2">
-    <h3 class="lg:col-span-2 font-semibold">{{ $t("country") }}</h3>
-    <h3 class="text-center font-semibold">{{ $t("service.ambulance") }}</h3>
-    <h3 class="text-center font-semibold">{{ $t("service.police") }}</h3>
-    <h3 class="text-center font-semibold">{{ $t("service.fire") }}</h3>
-  </span>
-  <ul class="max-h-[80vh] lg:max-h-[75vh] overflow-auto flex flex-col">
-    <li v-if="numbers.length === 0" class="text-center py-4 text-slate-400">
-      {{ $t("countryUnavailable", { country: countrySearch }) }}
-    </li>
-    <li class="grid grid-cols-4 lg:grid-cols-5 odd:bg-emerald-50 py-2" v-for="number in numbers"
-      :key="number.Country.Name">
-      <span class="lg:col-span-2 ellipsis" :title="number.Country.Name">
-        {{ number.Country.ISOCode }} - {{ number.Country.Name }}
-      </span>
-      <span class="text-center ellipsis">
-        {{ number.Ambulance.All[0] }}
-      </span>
-      <span class="text-center ellipsis">
-        {{ number.Police.All[0] }}
-      </span>
-      <span class="text-center ellipsis">
-        {{ number.Fire.All[0] }}
-      </span>
-    </li>
-  </ul>
 </template>
 
-<script lang="ts">
-export default {
-  name: "emergency-numbers",
-  data() {
-    return {
-      countrySearch: "",
-      numbers: emergencyNumbers.data,
-    };
-  },
-  watch: {
-    countrySearch(newSearch: string) {
-      if (newSearch === "") {
-        this.numbers = emergencyNumbers.data;
-      } else {
-        this.filterNumbers();
-      }
-    },
-  },
-  methods: {
-    filterNumbers() {
-      this.numbers = emergencyNumbers.data.filter((number) =>
-        number.Country.Name.toLowerCase().includes(
-          this.countrySearch.toLowerCase()
-        )
-      );
-    },
-  },
-};
+<script setup lang="ts">
+import { ref, computed, onMounted } from "vue";
+import emergencyNumbers from "@/data/emergencyNumbers.json";
+import { getCountryFlag } from "@/data/countryFlags";
+import {
+  ITEMS_PER_PAGE,
+  serviceTypes,
+  type EmergencyNumber,
+} from "@/data/emergency";
+
+const searchQuery = ref("");
+const activeFilters = ref<string[]>([]);
+const sortField = ref<"country" | null>(null);
+const sortDirection = ref<"asc" | "desc">("asc");
+const isLoading = ref(true);
+const selectedCountry = ref<EmergencyNumber | null>(null);
+const highlightedIndex = ref(-1);
+const currentPage = ref(1);
+const itemsPerPage = ITEMS_PER_PAGE;
+
+const filteredNumbers = computed(() => {
+  let results = emergencyNumbers.data as EmergencyNumber[];
+
+  if (searchQuery.value) {
+    const query = searchQuery.value.toLowerCase();
+    results = results.filter(
+      (country) =>
+        country.Country.Name.toLowerCase().includes(query) ||
+        country.Country.ISOCode.toLowerCase().includes(query)
+    );
+  }
+
+  if (activeFilters.value.length > 0) {
+    results = results.filter((country) => {
+      return activeFilters.value.some((filter) => {
+        switch (filter) {
+          case "ambulance":
+            return (
+              country.Ambulance.All.length > 0 &&
+              country.Ambulance.All[0] !== ""
+            );
+          case "police":
+            return (
+              country.Police.All.length > 0 && country.Police.All[0] !== ""
+            );
+          case "fire":
+            return country.Fire.All.length > 0 && country.Fire.All[0] !== "";
+          default:
+            return true;
+        }
+      });
+    });
+  }
+
+  if (sortField.value === "country") {
+    results.sort((a, b) => {
+      const comparison = a.Country.Name.localeCompare(b.Country.Name);
+      return sortDirection.value === "asc" ? comparison : -comparison;
+    });
+  }
+
+  return results;
+});
+
+const totalPages = computed(() =>
+  Math.ceil(filteredNumbers.value.length / itemsPerPage)
+);
+
+const paginatedNumbers = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  return filteredNumbers.value.slice(start, end);
+});
+
+function onSearchInput() {
+  currentPage.value = 1;
+  highlightedIndex.value = -1;
+}
+
+function clearSearch() {
+  searchQuery.value = "";
+  currentPage.value = 1;
+}
+
+function toggleServiceFilter(serviceKey: string) {
+  const index = activeFilters.value.indexOf(serviceKey);
+  if (index > -1) {
+    activeFilters.value.splice(index, 1);
+  } else {
+    activeFilters.value.push(serviceKey);
+  }
+  currentPage.value = 1;
+}
+
+function toggleSort(field: "country") {
+  if (sortField.value === field) {
+    sortDirection.value = sortDirection.value === "asc" ? "desc" : "asc";
+  } else {
+    sortField.value = field;
+    sortDirection.value = "asc";
+  }
+}
+
+function getSortIconClass(field: string) {
+  if (sortField.value !== field) return "";
+  return sortDirection.value === "asc" ? "rotate-0" : "rotate-180";
+}
+
+function clearAllFilters() {
+  searchQuery.value = "";
+  activeFilters.value = [];
+  sortField.value = null;
+  currentPage.value = 1;
+}
+
+function selectCountry(country: EmergencyNumber) {
+  selectedCountry.value = country;
+}
+
+function closeModal() {
+  selectedCountry.value = null;
+}
+
+function onRowKeydown(event: KeyboardEvent, country: EmergencyNumber) {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    selectCountry(country);
+  }
+}
+
+function previousPage() {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
+}
+
+function nextPage() {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+  }
+}
 </script>
