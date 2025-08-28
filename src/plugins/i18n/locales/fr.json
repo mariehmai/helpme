@@ -52,7 +52,7 @@
   "country": "Pays",
   "countries": "pays",
   "countryUnavailable": "Les données d'urgence ne sont pas disponibles pour le pays {country}.",
-  "search.placeholder": "🔍 Rechercher des pays...",
+  "search.placeholder": "Rechercher des pays...",
   "search.clear": "Effacer la recherche",
   "loading.numbers": "Chargement des numéros d'urgence...",
   "noResults.title": "Aucun pays trouvé",
