@@ -6,7 +6,9 @@ import IntroductionSection from "@/components/IntroductionSection.vue";
 
 <template>
   <header class="max-h-[100vh] lg:flex lg:place-items-center pr-[6rem] gap-10">
-    <LanguageSelector />
+    <div class="fixed top-8 left-8 z-50">
+      <LanguageSelector />
+    </div>
     <img
       alt="Puzzled emoji"
       class="block mt-0 mx-auto mb-8"

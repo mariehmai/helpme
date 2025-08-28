@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto p-4">
+  <div class="max-w-7xl mx-auto">
     <div class="flex flex-col gap-4">
       <div class="flex items-center justify-between flex-wrap">
         <h2
@@ -64,9 +64,9 @@
 
     <div class="space-y-4">
       <div
-        class="grid grid-cols-4 lg:grid-cols-5 gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg font-semibold text-gray-900 dark:text-gray-100"
+        class="hidden lg:grid grid-cols-5 gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg font-semibold text-gray-900 dark:text-gray-100"
       >
-        <div class="lg:col-span-2 flex items-center">
+        <div class="col-span-2 flex items-center">
           <button
             @click="toggleSort('country')"
             class="bg-none border-none text-gray-900 dark:text-gray-100 cursor-pointer flex items-center gap-2 font-semibold text-base"
@@ -90,6 +90,22 @@
         </div>
       </div>
 
+      <div
+        class="lg:hidden p-4 bg-gray-50 dark:bg-gray-800 rounded-lg font-semibold text-gray-900 dark:text-gray-100"
+      >
+        <button
+          @click="toggleSort('country')"
+          class="bg-none border-none text-gray-900 dark:text-gray-100 cursor-pointer flex items-center gap-2 font-semibold text-base"
+        >
+          {{ $t("country") }}
+          <span
+            class="text-xs transition-transform duration-200"
+            :class="getSortIconClass('country')"
+            >↕️</span
+          >
+        </button>
+      </div>
+
       <div v-if="filteredNumbers.length === 0" class="text-center py-16">
         <div class="text-6xl mb-4">🔍</div>
         <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
@@ -110,7 +126,7 @@
         <div
           v-for="(country, index) in paginatedNumbers"
           :key="country.Country.Name"
-          class="grid grid-cols-4 lg:grid-cols-5 gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 items-center hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-lg"
+          class="hidden lg:grid grid-cols-5 gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 items-center hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-lg"
           :class="{
             'bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 -translate-y-0.5 shadow-lg':
               highlightedIndex === index,
@@ -119,7 +135,7 @@
           :tabindex="0"
           @keydown="onRowKeydown($event, country)"
         >
-          <div class="lg:col-span-2 flex items-center gap-3">
+          <div class="col-span-2 flex items-center gap-3">
             <div class="flex items-center gap-2 text-xl">
               {{ getCountryFlag(country.Country.ISOCode) }}
               <span
@@ -169,11 +185,85 @@
             </a>
           </div>
         </div>
+
+        <div
+          v-for="(country, index) in paginatedNumbers"
+          :key="`mobile-${country.Country.Name}`"
+          class="lg:hidden p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-lg"
+          :class="{
+            'bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 -translate-y-0.5 shadow-lg':
+              highlightedIndex === index,
+          }"
+          @click="selectCountry(country)"
+          :tabindex="0"
+          @keydown="onRowKeydown($event, country)"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center gap-2 text-xl">
+              {{ getCountryFlag(country.Country.ISOCode) }}
+              <span
+                class="text-xs font-semibold text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
+              >
+                {{ country.Country.ISOCode }}
+              </span>
+            </div>
+            <span
+              class="font-medium text-gray-900 dark:text-gray-100 text-lg"
+              :title="country.Country.Name"
+            >
+              {{ country.Country.Name }}
+            </span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-4">
+            <div class="text-center">
+              <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                🚑
+              </div>
+              <a
+                :href="`tel:${country.Ambulance.All[0]}`"
+                class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600 hover:text-white block"
+                @click.stop
+                :title="$t('callService', { service: $t('service.ambulance') })"
+              >
+                {{ country.Ambulance.All[0] || "—" }}
+              </a>
+            </div>
+
+            <div class="text-center">
+              <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                👮
+              </div>
+              <a
+                :href="`tel:${country.Police.All[0]}`"
+                class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600 hover:text-white block"
+                @click.stop
+                :title="$t('callService', { service: $t('service.police') })"
+              >
+                {{ country.Police.All[0] || "—" }}
+              </a>
+            </div>
+
+            <div class="text-center">
+              <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                🚒
+              </div>
+              <a
+                :href="`tel:${country.Fire.All[0]}`"
+                class="text-emerald-600 dark:text-emerald-400 no-underline font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600 hover:text-white block"
+                @click.stop
+                :title="$t('callService', { service: $t('service.fire') })"
+              >
+                {{ country.Fire.All[0] || "—" }}
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div
         v-if="totalPages > 1"
-        class="flex justify-between items-center mt-8 p-4"
+        class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 p-4"
       >
         <button
           @click="previousPage"
@@ -183,7 +273,7 @@
           ← {{ $t("pagination.previous") }}
         </button>
 
-        <span class="font-medium text-gray-700 dark:text-gray-300">
+        <span class="font-medium text-gray-700 dark:text-gray-300 text-center">
           {{
             $t("pagination.info", { current: currentPage, total: totalPages })
           }}
@@ -295,7 +385,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 import emergencyNumbers from "@/data/emergencyNumbers.json";
 import { getCountryFlag } from "@/data/countryFlags";
 import {
@@ -308,7 +398,6 @@ const searchQuery = ref("");
 const activeFilters = ref<string[]>([]);
 const sortField = ref<"country" | null>(null);
 const sortDirection = ref<"asc" | "desc">("asc");
-const isLoading = ref(true);
 const selectedCountry = ref<EmergencyNumber | null>(null);
 const highlightedIndex = ref(-1);
 const currentPage = ref(1);
