@@ -241,31 +241,5 @@
         </div>
       </div>
     </div>
-
-    <!-- Contact Section -->
-    <div
-      class="bg-gray-900 dark:bg-gray-800 rounded-xl p-8 text-center text-white border border-gray-700"
-    >
-      <h2 class="text-2xl font-bold mb-4">
-        {{ $t("about.contact.title") }}
-      </h2>
-      <p class="mb-8 text-gray-300 text-lg">
-        {{ $t("about.contact.description") }}
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a
-          href="mailto:mai.mariehelene@gmail.com"
-          class="bg-teal-600 hover:bg-teal-700 px-6 py-3 rounded-lg transition-all duration-200 text-white font-medium"
-        >
-          📧 {{ $t("about.contact.email") }}
-        </a>
-        <a
-          href="https://github.com/mariehmai"
-          class="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg transition-all duration-200 text-white font-medium border border-gray-600"
-        >
-          {{ $t("about.contact.github") }}
-        </a>
-      </div>
-    </div>
   </div>
 </template>
