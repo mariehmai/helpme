@@ -9,10 +9,10 @@
         aria-haspopup="true"
       >
         <span class="flex items-center gap-2">
-          <span class="text-xl leading-none">{{ currentLanguage.flag }}</span>
+          <span class="text-xl leading-none">{{ currentLanguage?.flag || "🌐" }}</span>
           <span
             class="font-semibold text-xs text-gray-800 dark:text-gray-200"
-            >{{ currentLanguage.code }}</span
+            >{{ currentLanguage?.code ?? "EN" }}</span
           >
         </span>
         <svg

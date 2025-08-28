@@ -70,63 +70,51 @@
       "title": "Quel Service Dois-je Appeler ?",
       "ambulance": {
         "title": "Appelez l'Ambulance Pour",
-        "items": [
-          "Difficultés respiratoires ou douleurs thoraciques",
-          "Perte de conscience",
-          "Saignements graves ou blessures",
-          "Symptômes de crise cardiaque ou d'AVC", 
-          "Accidents graves"
-        ]
+        "item1": "Difficultés respiratoires ou douleurs thoraciques",
+        "item2": "Perte de conscience",
+        "item3": "Saignements graves ou blessures",
+        "item4": "Symptômes de crise cardiaque ou d'AVC",
+        "item5": "Accidents graves"
       },
       "police": {
         "title": "Appelez la Police Pour",
-        "items": [
-          "Crime en cours",
-          "Menaces à la sécurité personnelle",
-          "Accidents avec blessés",
-          "Violence domestique",
-          "Activité suspecte"
-        ]
+        "item1": "Crime en cours",
+        "item2": "Menaces à la sécurité personnelle",
+        "item3": "Accidents avec blessés",
+        "item4": "Violence domestique",
+        "item5": "Activité suspecte"
       },
       "fire": {
         "title": "Appelez les Pompiers Pour",
-        "items": [
-          "Tout incendie, même petit",
-          "Fuites de gaz ou dangers électriques",
-          "Personnes piégées dans des bâtiments",
-          "Déversements chimiques",
-          "Alarmes de monoxyde de carbone"
-        ]
+        "item1": "Tout incendie, même petit",
+        "item2": "Fuites de gaz ou dangers électriques",
+        "item3": "Personnes piégées dans des bâtiments",
+        "item4": "Déversements chimiques",
+        "item5": "Alarmes de monoxyde de carbone"
       }
     },
     "information": {
       "title": "Informations Essentielles à Fournir",
       "location": {
         "title": "Détails de Localisation",
-        "items": [
-          "Adresse complète avec numéro de maison/bâtiment",
-          "Ville et code postal",
-          "Points de repère ou rues adjacentes",
-          "Numéro d'étage/appartement si applicable"
-        ]
+        "item1": "Adresse complète avec numéro de maison/bâtiment",
+        "item2": "Ville et code postal",
+        "item3": "Points de repère ou rues adjacentes",
+        "item4": "Numéro d'étage/appartement si applicable"
       },
       "details": {
         "title": "Détails de l'Urgence",
-        "items": [
-          "Que s'est-il passé ? (accident, incendie, urgence médicale)",
-          "Nombre de personnes impliquées ou blessées",
-          "État actuel des victimes",
-          "Dangers immédiats présents"
-        ]
+        "item1": "Que s'est-il passé ? (accident, incendie, urgence médicale)",
+        "item2": "Nombre de personnes impliquées ou blessées",
+        "item3": "État actuel des victimes",
+        "item4": "Dangers immédiats présents"
       },
       "tips": {
         "title": "À Retenir",
-        "items": [
-          "Restez calme et parlez clairement",
-          "Ne raccrochez pas avant qu'on vous le dise",
-          "Suivez les instructions données",
-          "Ayez votre numéro de rappel prêt"
-        ]
+        "item1": "Restez calme et parlez clairement",
+        "item2": "Ne raccrochez pas avant qu'on vous le dise",
+        "item3": "Suivez les instructions données",
+        "item4": "Ayez votre numéro de rappel prêt"
       }
     },
     "decision": {
@@ -138,7 +126,7 @@
         "subtitle": "N'attendez pas - appelez maintenant et donnez d'abord la localisation"
       },
       "no": {
-        "answer": "NON", 
+        "answer": "NON",
         "title": "Utilisez les Numéros Non-Urgents",
         "subtitle": "Appelez les services locaux ou demandez un avis médical",
         "options": {
@@ -150,24 +138,22 @@
     },
     "process": {
       "title": "Que Se Passe-t-il Quand Vous Appelez",
-      "steps": [
-        {
-          "title": "L'Opérateur Répond",
-          "description": "Il demande quel service vous souhaitez"
-        },
-        {
-          "title": "Fournissez la Localisation", 
-          "description": "Donnez l'adresse exacte et les points de repère"
-        },
-        {
-          "title": "Décrivez l'Urgence",
-          "description": "Expliquez clairement ce qui s'est passé"
-        },
-        {
-          "title": "Suivez les Instructions",
-          "description": "Restez en ligne et suivez les conseils"
-        }
-      ]
+      "step1": {
+        "title": "L'Opérateur Répond",
+        "description": "Il demande quel service vous souhaitez"
+      },
+      "step2": {
+        "title": "Fournissez la Localisation",
+        "description": "Donnez l'adresse exacte et les points de repère"
+      },
+      "step3": {
+        "title": "Décrivez l'Urgence",
+        "description": "Expliquez clairement ce qui s'est passé"
+      },
+      "step4": {
+        "title": "Suivez les Instructions",
+        "description": "Restez en ligne et suivez les conseils"
+      }
     }
   }
 }
