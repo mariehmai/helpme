@@ -44,6 +44,7 @@
   "menu.numbers": "Números de emergencia",
   "menu.firstAid": "Acciones de primeros auxilios",
   "menu.home": "Inicio",
+  "menu.guide": "Guía de Emergencias",
   "menu.about": "Acerca de",
   "service.police": "Policía",
   "service.fire": "Bomberos",
@@ -61,5 +62,98 @@
   "pagination.previous": "Anterior",
   "pagination.next": "Siguiente",
   "pagination.info": "Página {current} de {total}",
-  "modal.title": "Números de Emergencia - {country}"
+  "modal.title": "Números de Emergencia - {country}",
+  "emergencyGuide": {
+    "title": "Guía de Respuesta a Emergencias",
+    "subtitle": "Aprende cuándo llamar a cada servicio y qué información proporcionar",
+    "whichService": {
+      "title": "¿A Qué Servicio Debo Llamar?",
+      "ambulance": {
+        "title": "Llama a la Ambulancia Para",
+        "item1": "Dificultad para respirar o dolor en el pecho",
+        "item2": "Pérdida del conocimiento",
+        "item3": "Sangrado severo o lesiones graves",
+        "item4": "Síntomas de ataque cardíaco o derrame cerebral",
+        "item5": "Accidentes graves"
+      },
+      "police": {
+        "title": "Llama a la Policía Para",
+        "item1": "Crimen en progreso",
+        "item2": "Amenazas a la seguridad personal",
+        "item3": "Accidentes con lesionados",
+        "item4": "Violencia doméstica",
+        "item5": "Actividad sospechosa"
+      },
+      "fire": {
+        "title": "Llama a los Bomberos Para",
+        "item1": "Cualquier incendio, sin importar el tamaño",
+        "item2": "Fugas de gas o peligros eléctricos", 
+        "item3": "Personas atrapadas en edificios",
+        "item4": "Derrames químicos",
+        "item5": "Alarmas de monóxido de carbono"
+      }
+    },
+    "information": {
+      "title": "Información Esencial a Proporcionar",
+      "location": {
+        "title": "Detalles de Ubicación",
+        "item1": "Dirección completa con número de casa/edificio",
+        "item2": "Ciudad y código postal",
+        "item3": "Puntos de referencia o calles cercanas",
+        "item4": "Número de piso/apartamento si aplica"
+      },
+      "details": {
+        "title": "Detalles de la Emergencia",
+        "item1": "¿Qué pasó? (accidente, incendio, emergencia médica)",
+        "item2": "Número de personas involucradas o heridas",
+        "item3": "Condición actual de las víctimas",
+        "item4": "Peligros inmediatos presentes"
+      },
+      "tips": {
+        "title": "Recuerda",
+        "item1": "Mantén la calma y habla claramente",
+        "item2": "No cuelgues hasta que te lo indiquen",
+        "item3": "Sigue las instrucciones dadas",
+        "item4": "Ten tu número de contacto listo"
+      }
+    },
+    "decision": {
+      "title": "Guía de Decisión Rápida",
+      "question": "¿La vida de alguien está en peligro inmediato?",
+      "yes": {
+        "answer": "SÍ",
+        "title": "Llama a los Servicios de Emergencia Inmediatamente",
+        "subtitle": "No esperes - llama ahora y proporciona la ubicación primero"
+      },
+      "no": {
+        "answer": "NO",
+        "title": "Usa Números No Urgentes",
+        "subtitle": "Llama a servicios locales o busca consejo médico",
+        "options": {
+          "clinic": "Visita atención urgente o clínica",
+          "nonEmergency": "Llama a la línea policial no urgente",
+          "doctor": "Contacta a tu médico"
+        }
+      }
+    },
+    "process": {
+      "title": "Qué Sucede Cuando Llamas",
+      "step1": {
+        "title": "El Operador Responde",
+        "description": "Te preguntará qué servicio necesitas"
+      },
+      "step2": {
+        "title": "Proporciona Ubicación",
+        "description": "Da la dirección exacta y puntos de referencia"
+      },
+      "step3": {
+        "title": "Describe la Emergencia",
+        "description": "Explica claramente lo que pasó"
+      },
+      "step4": {
+        "title": "Sigue las Instrucciones",
+        "description": "Mantente en línea y sigue las indicaciones"
+      }
+    }
+  }
 }

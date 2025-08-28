@@ -51,11 +51,12 @@ function scrollToSearch() {
         >
           🚨 {{ $t("home.cta.emergency") }}
         </button>
-        <button
+        <RouterLink
+          to="/emergency-guide"
           class="px-8 py-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 transform hover:-translate-y-0.5"
         >
           🩹 {{ $t("home.cta.firstAid") }}
-        </button>
+        </RouterLink>
       </div>
     </div>
 

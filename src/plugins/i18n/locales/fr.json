@@ -44,6 +44,7 @@
   "menu.numbers": "Numéros d'urgence",
   "menu.firstAid": "Actions de premiers secours",
   "menu.home": "Accueil",
+  "menu.guide": "Guide d'Urgence",
   "menu.about": "À propos",
   "service.police": "Police",
   "service.fire": "Sapeurs-pompiers",
@@ -61,5 +62,112 @@
   "pagination.previous": "Précédent",
   "pagination.next": "Suivant",
   "pagination.info": "Page {current} sur {total}",
-  "modal.title": "Numéros d'urgence - {country}"
+  "modal.title": "Numéros d'urgence - {country}",
+  "emergencyGuide": {
+    "title": "Guide d'Intervention d'Urgence",
+    "subtitle": "Apprenez quand appeler chaque service et quelles informations fournir",
+    "whichService": {
+      "title": "Quel Service Dois-je Appeler ?",
+      "ambulance": {
+        "title": "Appelez l'Ambulance Pour",
+        "items": [
+          "Difficultés respiratoires ou douleurs thoraciques",
+          "Perte de conscience",
+          "Saignements graves ou blessures",
+          "Symptômes de crise cardiaque ou d'AVC", 
+          "Accidents graves"
+        ]
+      },
+      "police": {
+        "title": "Appelez la Police Pour",
+        "items": [
+          "Crime en cours",
+          "Menaces à la sécurité personnelle",
+          "Accidents avec blessés",
+          "Violence domestique",
+          "Activité suspecte"
+        ]
+      },
+      "fire": {
+        "title": "Appelez les Pompiers Pour",
+        "items": [
+          "Tout incendie, même petit",
+          "Fuites de gaz ou dangers électriques",
+          "Personnes piégées dans des bâtiments",
+          "Déversements chimiques",
+          "Alarmes de monoxyde de carbone"
+        ]
+      }
+    },
+    "information": {
+      "title": "Informations Essentielles à Fournir",
+      "location": {
+        "title": "Détails de Localisation",
+        "items": [
+          "Adresse complète avec numéro de maison/bâtiment",
+          "Ville et code postal",
+          "Points de repère ou rues adjacentes",
+          "Numéro d'étage/appartement si applicable"
+        ]
+      },
+      "details": {
+        "title": "Détails de l'Urgence",
+        "items": [
+          "Que s'est-il passé ? (accident, incendie, urgence médicale)",
+          "Nombre de personnes impliquées ou blessées",
+          "État actuel des victimes",
+          "Dangers immédiats présents"
+        ]
+      },
+      "tips": {
+        "title": "À Retenir",
+        "items": [
+          "Restez calme et parlez clairement",
+          "Ne raccrochez pas avant qu'on vous le dise",
+          "Suivez les instructions données",
+          "Ayez votre numéro de rappel prêt"
+        ]
+      }
+    },
+    "decision": {
+      "title": "Guide de Décision Rapide",
+      "question": "La vie de quelqu'un est-elle en danger immédiat ?",
+      "yes": {
+        "answer": "OUI",
+        "title": "Appelez les Services d'Urgence Immédiatement",
+        "subtitle": "N'attendez pas - appelez maintenant et donnez d'abord la localisation"
+      },
+      "no": {
+        "answer": "NON", 
+        "title": "Utilisez les Numéros Non-Urgents",
+        "subtitle": "Appelez les services locaux ou demandez un avis médical",
+        "options": {
+          "clinic": "Consultez un centre de soins ou une clinique",
+          "nonEmergency": "Appelez la ligne police non-urgente",
+          "doctor": "Contactez votre médecin"
+        }
+      }
+    },
+    "process": {
+      "title": "Que Se Passe-t-il Quand Vous Appelez",
+      "steps": [
+        {
+          "title": "L'Opérateur Répond",
+          "description": "Il demande quel service vous souhaitez"
+        },
+        {
+          "title": "Fournissez la Localisation", 
+          "description": "Donnez l'adresse exacte et les points de repère"
+        },
+        {
+          "title": "Décrivez l'Urgence",
+          "description": "Expliquez clairement ce qui s'est passé"
+        },
+        {
+          "title": "Suivez les Instructions",
+          "description": "Restez en ligne et suivez les conseils"
+        }
+      ]
+    }
+  }
 }

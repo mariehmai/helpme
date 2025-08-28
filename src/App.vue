@@ -15,6 +15,9 @@ import IntroductionSection from "@/components/IntroductionSection.vue";
         <RouterLink to="/" class="nav-link">
           {{ $t("menu.home") }}
         </RouterLink>
+        <RouterLink to="/emergency-guide" class="nav-link">
+          {{ $t("menu.guide") }}
+        </RouterLink>
         <RouterLink to="/about" class="nav-link">
           {{ $t("menu.about") }}
         </RouterLink>

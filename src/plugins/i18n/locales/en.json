@@ -44,6 +44,7 @@
   "menu.numbers": "Emergency numbers",
   "menu.firstAid": "First aid actions",
   "menu.home": "Home",
+  "menu.guide": "Emergency Guide",
   "menu.about": "About",
   "service.police": "Police",
   "service.fire": "Fire brigade",
@@ -61,5 +62,98 @@
   "pagination.previous": "Previous",
   "pagination.next": "Next",
   "pagination.info": "Page {current} of {total}",
-  "modal.title": "{country} Emergency Numbers"
+  "modal.title": "{country} Emergency Numbers",
+  "emergencyGuide": {
+    "title": "Emergency Response Guide",
+    "subtitle": "Learn when to call each service and what information to provide",
+    "whichService": {
+      "title": "Which Service Should I Call?",
+      "ambulance": {
+        "title": "Call Ambulance For",
+        "item1": "Difficulty breathing or chest pain",
+        "item2": "Loss of consciousness",
+        "item3": "Severe bleeding or injuries",
+        "item4": "Heart attack or stroke symptoms",
+        "item5": "Serious accidents"
+      },
+      "police": {
+        "title": "Call Police For",
+        "item1": "Crime in progress",
+        "item2": "Threats to personal safety", 
+        "item3": "Accidents with injuries",
+        "item4": "Domestic violence",
+        "item5": "Suspicious activity"
+      },
+      "fire": {
+        "title": "Call Fire For",
+        "item1": "Any fire, no matter how small",
+        "item2": "Gas leaks or electrical hazards",
+        "item3": "People trapped in buildings", 
+        "item4": "Chemical spills",
+        "item5": "Carbon monoxide alarms"
+      }
+    },
+    "information": {
+      "title": "Essential Information to Provide",
+      "location": {
+        "title": "Location Details",
+        "item1": "Full street address with house/building number",
+        "item2": "City and postal code",
+        "item3": "Nearby landmarks or cross streets",
+        "item4": "Floor/apartment number if applicable"
+      },
+      "details": {
+        "title": "Emergency Details",
+        "item1": "What happened? (accident, fire, medical emergency)",
+        "item2": "Number of people involved or injured",
+        "item3": "Current condition of victims",
+        "item4": "Any immediate dangers present"
+      },
+      "tips": {
+        "title": "Remember",
+        "item1": "Stay calm and speak clearly",
+        "item2": "Don't hang up until told to do so",
+        "item3": "Follow any instructions given", 
+        "item4": "Have your callback number ready"
+      }
+    },
+    "decision": {
+      "title": "Quick Decision Guide",
+      "question": "Is someone's life in immediate danger?",
+      "yes": {
+        "answer": "YES",
+        "title": "Call Emergency Services Immediately",
+        "subtitle": "Don't wait - call now and provide location first"
+      },
+      "no": {
+        "answer": "NO",
+        "title": "Use Non-Emergency Numbers",
+        "subtitle": "Call local services or seek medical advice",
+        "options": {
+          "clinic": "Visit urgent care or clinic",
+          "nonEmergency": "Call non-emergency police line",
+          "doctor": "Contact your doctor"
+        }
+      }
+    },
+    "process": {
+      "title": "What Happens When You Call",
+      "step1": {
+        "title": "Operator Answers",
+        "description": "They'll ask which service you need"
+      },
+      "step2": {
+        "title": "Provide Location", 
+        "description": "Give exact address and landmarks"
+      },
+      "step3": {
+        "title": "Describe Emergency",
+        "description": "Explain what happened clearly"
+      },
+      "step4": {
+        "title": "Follow Instructions",
+        "description": "Stay on line and follow guidance"
+      }
+    }
+  }
 }
