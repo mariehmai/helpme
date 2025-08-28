@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full px-4 md:px-8 py-8">
+  <div class="max-w-2xl mx-auto py-8">
     <div class="flex flex-col gap-6">
       <!-- Header Section -->
       <div class="flex items-center justify-between flex-wrap">
@@ -25,6 +25,7 @@
               🔍
             </span>
             <input
+              id="emergency-search"
               v-model="searchQuery"
               :placeholder="$t('search.placeholder')"
               class="w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-lg text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-all duration-200 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
@@ -62,7 +63,6 @@
       </div>
     </div>
 
-    <!-- Divider -->
     <div class="h-px bg-gray-200 dark:bg-gray-700 my-8"></div>
 
     <!-- Emergency Numbers Table -->

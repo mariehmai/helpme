@@ -2,6 +2,30 @@
 defineProps<{
   msg: string;
 }>();
+
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+function scrollToSearch() {
+  if (router.currentRoute.value.path === "/") {
+    const searchInput = document.getElementById("emergency-search");
+    if (searchInput) {
+      searchInput.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(() => searchInput.focus(), 500);
+    }
+  } else {
+    router.push("/").then(() => {
+      setTimeout(() => {
+        const searchInput = document.getElementById("emergency-search");
+        if (searchInput) {
+          searchInput.scrollIntoView({ behavior: "smooth", block: "center" });
+          setTimeout(() => searchInput.focus(), 300);
+        }
+      }, 100);
+    });
+  }
+}
 </script>
 
 <template>
@@ -22,6 +46,7 @@ defineProps<{
         class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
       >
         <button
+          @click="scrollToSearch"
           class="px-8 py-4 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5"
         >
           🚨 {{ $t("home.cta.emergency") }}

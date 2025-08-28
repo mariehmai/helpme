@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4">
+  <div class="max-w-4xl mx-auto py-8">
     <!-- Hero Section -->
     <div class="text-center mb-16">
       <h1
